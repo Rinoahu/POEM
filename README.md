@@ -2,7 +2,7 @@
 ==============
 Make sure that you have the following installed
 
-1.  Python2.7 (Recommend Anaconda https://www.continuum.io/downloads#linux ) and Packages:
+1.  Python2.7 (Recommend [Anaconda](https://www.continuum.io/downloads#linux, "https://www.continuum.io/downloads#linux" ) ) and Packages:
     1. Networkx
     2. Biopython (version >=1.68)
     3. Numpy (version >= 1.11.2)
