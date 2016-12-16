@@ -1,5 +1,6 @@
 #!/bin/sh
 
+rm -rf ./database/cog
 find ./ -name *un~ | xargs rm
 cd example
 sh clean.sh
