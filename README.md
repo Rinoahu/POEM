@@ -7,8 +7,9 @@ Make sure that you have the following installed
     2. Biopython (version >=1.68)
     3. Numpy (version >= 1.11.2)
     4. Keras (version >=1.1.2)
-2.  [Diamond]:https://github.com/bbuchfink/diamond (version >= 0.8.18) 
-3.  [MetaGeneMark]:http://exon.gatech.edu/Genemark/license_download.cgi
+2.  [Diamond](https://github.com/bbuchfink/diamond, "https://github.com/bbuchfink/diamond") (version >= 0.8.18) 
+3.  [MetaGeneMark](http://exon.gatech.edu/Genemark/license_download.cgi, "http://exon.gatech.edu/Genemark/license_download.cgi
+")
 4.  [CD-hit]:https://github.com/weizhongli/cdhit
 5.  [IDBA-UD]:https://github.com/loneknightpy/idba
 
