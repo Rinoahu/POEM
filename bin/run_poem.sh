@@ -45,6 +45,8 @@ if [ ! $fas ]; then
 	echo '#'
 	echo '#######################################'
 	echo ''
+	echo '   -f/--fasta          fast file of reads or genome|scaffold|contig'
+	echo '-a/--assembly [y|n]    genome assemlby module switch on or off'
 	exit 1
 
 fi
