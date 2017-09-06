@@ -11,11 +11,43 @@ from Bio.SeqUtils.CodonUsage import SynonymousCodons
 import math
 from math import log, sqrt
 from collections import Counter
-
 import pickle
 
-#from sklearn import cross_validation, metrics  # Additional scklearn functions
+from sklearn import cross_validation, metrics  # Additional scklearn functions
 #from sklearn.grid_search import GridSearchCV  # Perforing grid search
+
+from keras import backend as K
+
+def f1_score(y_true, y_pred):
+    def recall(y_true, y_pred):
+        """Recall metric.
+
+        Only computes a batch-wise average of recall.
+
+        Computes the recall, a metric for multi-label classification of
+        how many relevant items are selected.
+        """
+        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+        possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+        recall = true_positives / (possible_positives + K.epsilon())
+        return recall
+
+    def precision(y_true, y_pred):
+        """Precision metric.
+
+        Only computes a batch-wise average of precision.
+
+        Computes the precision, a metric for multi-label classification of
+        how many selected items are relevant.
+        """
+        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+        predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+        precision = true_positives / (predicted_positives + K.epsilon())
+        return precision
+    precision = precision(y_true, y_pred)
+    recall = recall(y_true, y_pred)
+    return 2*((precision*recall)/(precision+recall))
+
 
 ##########################################################################
 # overlap of two gene
@@ -348,6 +380,7 @@ class CNN:
         self.opt = Adam(lr=5e-4, beta_1=0.995, beta_2=0.999, epsilon=1e-09)
         self.checkpointer = [ModelCheckpoint(filepath=save_path, verbose=1, save_best_only=True, mode='max', monitor='val_fbeta_score')]
         self.metric = keras.metrics.fbeta_score
+        #self.metric = f1_score
         self.cross_val = 1 / 3.
 
     def fit_2d(self, X_train, y_train, X_test=None, y_test=None):
@@ -375,8 +408,8 @@ class CNN:
 
         # set the conv model
         model = Sequential()
-        model.add(Convolution2D(nb_filters, nb_conv, nb_conv,
-                                border_mode='same', input_shape=(b, img_rows, img_cols), activation='relu', name='conv1_1'))
+        model.add(Convolution2D(nb_filters, nb_conv, nb_conv, border_mode='same', input_shape=(b, img_rows, img_cols), activation='relu', name='conv1_1'))
+        #model.add(Conv2D(64, (2, 2), padding="same", activation="relu", name="conv1_1", input_shape=(1, 192, 4)))
 
         model.add(Convolution2D(64, 3, 3, activation='relu', name='conv1_2'))
         model.add(MaxPooling2D((2, 2), strides=(2, 2)))
@@ -420,7 +453,7 @@ class CNN:
     # save the model
     def save(self, name, model='2d'):
         if model == '2d':
-            self.model_2d.save(name)
+            self.model_2d.save(name+'_'+model)
         else:
             pass
 
@@ -428,7 +461,7 @@ class CNN:
 # run training
 def run_train(train, seq_dict, clf, mode='2d'):
     # get the training data
-    split_rate = 2. / 3
+    split_rate = 1. / 3
 
     if mode == '2d':
         f = open(train, 'r')
@@ -449,9 +482,10 @@ def run_train(train, seq_dict, clf, mode='2d'):
         # validate
         y_test_pred = clf.predict_2d(X_test)
 
-    precise = precision_score(y_test, y_test_pred)
-    recall = recall_score(y_test, y_test_pred)
-    f1 = f1_score(y_test, y_test_pred)
+    #clf.save(train, mode)
+    precise = metrics.precision_score(y_test, y_test_pred)
+    recall = metrics.recall_score(y_test, y_test_pred)
+    f1 = metrics.f1_score(y_test, y_test_pred)
     print 'Precise:', precise
     print ' Recall:', recall
     print '     F1:', f1
@@ -510,7 +544,10 @@ def run_genome_predict(genome, seq_dict, model, clf, mode='2d'):
         j = a + b
         x0, x1, x2 = get_xx_one(j, seq_dict, 3, 128, 'test')
         if mode == '2d':
-            res = clf.predict_2d(x0)[0]
+            if a[1] == b[1] and a[2] == b[2]:
+                res = clf.predict_2d(x0)[0]
+            else:
+                res = 0
         else:
             pass
 
@@ -557,7 +594,7 @@ if __name__ == '__main__':
     from keras.layers import Dense, Dropout, Activation, Flatten, Embedding
     from keras.layers import Input, Merge, LSTM, GRU, Bidirectional, UpSampling2D, InputLayer
     from keras.optimizers import SGD, Adam, RMSprop
-    from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
+    from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D, Conv2D
     from keras.utils import np_utils
     from keras.callbacks import ModelCheckpoint, TensorBoard
     from keras.models import Model
@@ -578,7 +615,7 @@ if __name__ == '__main__':
         except:
             mode = '2d'
 
-        clf = CNN(nb_epoch = 256, maxlen = 128, save_path = train + '_' + mode + '.hdf5')
+        clf = CNN(nb_epoch = 16, maxlen = 128, save_path = train + '_' + mode + '.hdf5')
         run_train(train, seq_dict, clf, mode)
 
     elif model.startswith('predict'):
@@ -586,7 +623,7 @@ if __name__ == '__main__':
             print '#' * 79
             print '# To make a adjacent genes prediction'
             print '#' * 79
-            print 'python this.py adjacent foo.fasta foo.adjacent.txt foo.model\n'
+            print 'python this.py predict foo.fasta foo.adjacent.txt foo.model\n'
             print 'foo.adjacent.txt is the gene location in the format:'
             print '       locus1\tscf1\tstrand1\tstart1\tend1\tlocus2\tscf2\tstrand2\tstart2\tend2\n'
             raise SystemExit()

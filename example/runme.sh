@@ -4,9 +4,8 @@ rm -rf read* *_output
 if [ ! $1 ]
 then
     echo 'reads' $1
-    #art_illumina -ss HS25 -i eco.fasta -na -p -l 150 -f 10 -m 200 -s 10 -o read
-    #fq2fa --merge read1.fq read2.fq reads.fa
-    sim_reads eco.fasta reads.fa --depth 5 --error_rate .05
+    art_illumina -ss HS25 -i eco.fasta -na -p -l 150 -f 10 -m 200 -s 10 -o read
+    fq2fa --merge read1.fq read2.fq reads.fa
     bash ../bin/run_poem.sh -f reads.fa -a y
 else
     echo 'genome' $1

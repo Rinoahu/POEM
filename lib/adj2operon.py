@@ -31,10 +31,9 @@ def extract_operon(f):
         yield [elem[0] for elem in operon] + [operon[-1][1]], operon[0][2]
 
 
-
+cog_annot_dict = {}
 cog = sys.argv[2]
 f = open(cog, 'r')
-cog_annot_dict = {}
 for i in f:
     j = i[: -1].split('\t')
     if len(j) == 3:

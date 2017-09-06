@@ -362,14 +362,22 @@ for i in get_comp(G_AB_sub, threshold):
     if len(i) < 2:
         continue
     best_op, SP, SN, best_path = findbest(i, operons, paths)
+
     #print 'predict', i, 'real_operon', best_op, 'SP', SP, 'SN', SN
-    predict_annot = '$$'.join(sorted(set([cog_name_dict.get(elem, 'unknown') for elem in i])))
-    real_annot = '$$'.join(sorted(set(sum([[cog_name_dict.get(elem2, 'unknown') for elem2 in elem] for elem in best_op], []))))
+    #predict_annot = '$$'.join(sorted(set([cog_name_dict.get(elem, 'unknown') for elem in i])))
+    predict_annot = '$$'.join([cog_name_dict.get(elem, 'unknown') for elem in i])
+
+    #real_annot = '$$'.join(sorted(set(sum([[cog_name_dict.get(elem2, 'unknown') for elem2 in elem] for elem in best_op], []))))
+    real_annot = '$$'.join(sum([[cog_name_dict.get(elem2, 'unknown') for elem2 in elem] for elem in best_op], []))
+
 
     #best_op = '$$'.join([';;'.join(elem) for elem in best_op])
     best_ops = [';;'.join(elem) for elem in best_op]
     best_ops = [elem and elem or '*' for elem in best_ops]
     best_op = '$$'.join(best_ops)
+
+    if SN < .2 or SP < .2:
+        best_path = best_op = 'not found'
 
     F1 =  SP * SN > 0 and 2. * SP * SN / (SP + SN) or 0
     output = '%s\t%s\t%s\t%f\t%f\t%f'%('$$'.join(i), best_path, best_op, SP, SN, F1)

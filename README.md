@@ -54,7 +54,7 @@ For genome/assembly:
 ## Output
 ===============
 
-POEM will create a directory named read.fasta_output to save the results. The results include serveral file:
+The output of POEM is a set files:
 
     1.  input.fsa:
         Contig of IDBA-UD output

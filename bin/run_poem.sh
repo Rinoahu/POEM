@@ -5,10 +5,8 @@ SCRIPT=`realpath -s $0`
 SCRIPTPATH=`dirname $SCRIPT`
 
 # set the path for the python
-#lpython=/home/xiaoh/Downloads/compiler/intel/intelpython27/bin/python
-#python=pypy
-lpython=python
-python=python
+lpython=/home/xiaoh/Downloads/compiler/intel/intelpython27/bin/python
+python=pypy
 
 #######################################
 # parse the args
@@ -45,8 +43,6 @@ if [ ! $fas ]; then
 	echo '#'
 	echo '#######################################'
 	echo ''
-	echo '   -f/--fasta    fast file of reads or genome|scaffold|contig'
-	echo '-a/--assembly    genome assemlby module switch on or off [y|n]'
 	exit 1
 
 fi
@@ -85,10 +81,8 @@ echo 'step 1: Metagenemark to predict gene...'
 echo '##########################################################################'
 echo ''
 
-#gmhmmp=/home/xiaoh/Downloads/genome/evaluator/quast-3.1/libs/genemark/linux_64/gmhmmp 
-#$gmhmmp -A $fasta\_gmk_aa.fsa -p 0 -f G -m $SCRIPTPATH/../config/MetaGenemark/MetaGeneMark_v1.mod $fasta
-gmhmmp -A $fasta\_gmk_aa.fsa -p 0 -f G -m $SCRIPTPATH/../config/MetaGenemark/MetaGeneMark_v1.mod $fasta
-
+gmhmmp=/home/xiaoh/Downloads/genome/evaluator/quast-3.1/libs/genemark/linux_64/gmhmmp 
+$gmhmmp -A $fasta\_gmk_aa.fsa -p 0 -f G -m $SCRIPTPATH/../config/MetaGenemark/MetaGeneMark_v1.mod $fasta
 
 
 
