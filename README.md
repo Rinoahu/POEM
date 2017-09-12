@@ -1,4 +1,4 @@
-## Requirement
+## Requirements
 ==============
 Make sure that you have the following installed
 
@@ -23,16 +23,6 @@ $ cd ./POEM
 
 $ bash ./install.sh
 
-## Example
-===============
-
-example directory contain a genome fasta file of E.coli, run the script named runme.sh to test the pipeline
-
-$ cd ./example
-
-$ bash ./runme.sh genome
-
-
 
 ## Usage
 ===============
@@ -51,34 +41,46 @@ For genome/assembly:
     genome.fsa is the genome/assembly fasta file.
 
 
+
+## Example
+===============
+
+example directory contain a genome fasta file of E.coli, run the script named runme.sh to test the pipeline
+
+$ cd ./example
+
+$ bash ./runme.sh genome
+
+
+
 ## Output
 ===============
 
 The output of POEM is a set files:
 
     1.  input.fsa:
-        Contig of IDBA-UD output
+        Contigs from IDBA-UD output
 
     2.  input.fsa_gmk_aa.fsa and input.fsa.gff:
-        MetaGeneMark output of protein sequence and gff file on step 1
+        Proein sequences and gff file predicted by MetaGeneMark on contigs from step 1
 
     3.  input.fsa.cdhit and input.fsa.cdhit.clstr:
-        CD-hit outputs of step 2
+        CD-hit clustering results for protein sequences from step 2
 
     4.  input.fsa_aa.fsa:
-        Filtered protein sequence according to the result of step 3
+        Filtered protein sequence according to the results from step 3
 
     5.  input.fsa.flt.blast8:
-        m8 tabular output of step 4 against COG database
+        -m 8 tabular file of protein sequences from step 4 against the COG database
 
     6.  input.fsa.flt.blast8.flt:
-        Filtered blast output of step 5. Only hits which identity >= 80 are retained
+        Filtered blast results from step 5. Only hits which identity >= 80 are kept
 
     7.  input.fsa.cog:
-        COG annotation for protein sequence of step 4
+        COG annotation for protein sequences from step 4
 
     8.  input.fsa.locus:
-        The file records the gene's locus on genome
+        A file lists loci for all genes.
 
     9.  input.fsa.adjacency and input.fsa.operon:
         Predicted operonic adjacency and full operon of step 8
@@ -92,7 +94,7 @@ The output of POEM is a set files:
         The core COG adjacency
 
     12. input.fsa.core_network.sif, input.fsa.core_node.attrs and input.fsa.core_edge.attrs:
-        Network, node attribute and edge attribute extracted from step 11 for cytoscape visualization
+        These files are used for cytoscape visualization of core COG adjacency from step 11. input.fsa.core_network.sif records relationship between nodes. input.fsa.core_node.attrs records colors and names of nodes. input.fsa.core_edge.attrs records weight of edge between each adjacent nodes.
 
 
 
