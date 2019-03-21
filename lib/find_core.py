@@ -6,7 +6,7 @@ import networkx as nx
 from Bio import SeqIO
 from collections import Counter
 import cPickle as pickle
-from sklearn import cluster
+#from sklearn import cluster
 import numpy as np
 
 
@@ -105,7 +105,8 @@ for i in f:
 
 
 # build the graph
-locus = G.nodes()
+#locus = G.nodes()
+locus = list(G.nodes())
 
 def sort_fuc(qid):
     #print 'debug', qid
@@ -137,8 +138,10 @@ def find_share(acogs, bcogs, G_cog):
     for acog in acogs:
         for bcog in bcogs:
             if G_cog.has_edge(acog, bcog):
-                fuc = G_cog.edge[acog][bcog].get('fuc', 'unknown')
-                name = G_cog.edge[acog][bcog].get('name', 'unknown')
+                #fuc = G_cog.edge[acog][bcog].get('fuc', 'unknown')
+                fuc = G_cog[acog][bcog].get('fuc', 'unknown')
+                #name = G_cog.edge[acog][bcog].get('name', 'unknown')
+                name = G_cog[acog][bcog].get('name', 'unknown')
                 share = fuc + '::' + name
                 return acog, bcog, name, share
     return None, None, 'unknown', 'unknown::unknown'
@@ -315,7 +318,8 @@ def get_comp(G_AB, init = 3):
 
 # filter node with too many neigbors
 #print 'G_AB is', G_AB, G_AB.degree()
-outdeg = G_AB.degree()
+#outdeg = G_AB.degree()
+outdeg = dict(G_AB.degree())
 x = outdeg.values()
 max_dg = np.mean(x) + np.std(x) * 2
 G_AB_sub = G_AB.subgraph([elem for elem in outdeg if outdeg[elem] <= max_dg])

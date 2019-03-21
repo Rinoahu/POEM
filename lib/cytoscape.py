@@ -53,21 +53,24 @@ f = open(qry, 'r')
 
 _o1 = open('%s_network.sif' % prefix, 'w')
 
+
+# deprecate edge features
 # add the header
-_o2 = open('%s_edge.attrs' % prefix, 'w')
-_o2.write('Concurrency\n')
+#_o2 = open('%s_edge.attrs' % prefix, 'w')
+#_o2.write('Concurrency\n')
 
 _o3 = open('%s_node.tab' % prefix, 'w')
-_o3.write('\t'.join(['node', 'fuc', 'annot', 'col\n']))
+_o3.write('\t'.join(['node', 'cog_category', 'function', 'color\n']))
 visit = set()
 
 # deprecate the header
 f.next()
 for i in f:
     j = i[: -1].split('\t')
-    qid, sid, coo = j[0], j[1], j[-1]
-    _o1.write('%s nn %s\n' % (qid, sid))
-    _o2.write('%s (nn) %s = %s\n' % (qid, sid, coo))
+    qid, sid, frqs, coo = j[0], j[1], j[4], j[-1]
+    #_o1.write('%s nn %s\n' % (qid, sid))
+    _o1.write('%s %s %s\n' % (qid, frqs, sid))
+    #_o2.write('%s (nn) %s = %s\n' % (qid, sid, coo))
     if qid not in visit and qid in cog_col_dict:
         fuc, annot, col = cog_col_dict[qid]
         _o3.write('%s\t%s\t%s\t%s\n' % (qid, fuc, annot, col))
