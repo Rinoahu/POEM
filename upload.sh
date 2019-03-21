@@ -13,7 +13,7 @@ git config --global user.name Rinoahu
 git remote rm origin
 
 git add -A .
-git commit -m 'remove edge attribute for cytoscape'
+git commit -m 'modify installation'
 git remote add origin https://github.com/Rinoahu/POEM
 git pull origin master
 git push origin master

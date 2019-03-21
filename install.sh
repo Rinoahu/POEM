@@ -5,6 +5,9 @@ SCRIPT=`realpath -s $0`
 SCRIPTPATH=`dirname $SCRIPT`
 
 
+# install third part software and packages:
+conda install -y diamond prokka idba keras networkx biopython numpy
+
 # download the cog2014 database.
 echo "Download COG database"
 wget -q -c ftp://ftp.ncbi.nih.gov/pub/COG/COG2014/data/*2014* -P $SCRIPTPATH/database/cog/cog2014
