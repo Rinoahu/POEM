@@ -29,7 +29,7 @@ example directory contain a genome fasta file of E.coli, run the script named ru
 
 $ cd ./example
 
-$ bash ./runme.sh genome
+$ bash ./runme.sh eco.fasta
 
 
 
