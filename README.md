@@ -1,7 +1,7 @@
-POEM is a pipeline which can predict operons and core operons from metagenomic genome/assembly or short reads.
+POEM is a pipeline which can predict operons and core operons from metagenomic genome/assembly or short reads. It can be run on most * NIX systems.  
 
-## Requirement
-==============
+## Requirements
+
 
 This pipeline is available on Linux systems. Make sure that you have the following installed
 
@@ -11,30 +11,30 @@ This pipeline is available on Linux systems. Make sure that you have the followi
     make sure to add path of gmhmmp to $PATH environment variable
 
 ## Installation
-===============
 
+```
 $ git clone https://github.com/Rinoahu/POEM
 
 $ cd ./POEM
 
 $ bash ./install.sh
-
+```
 The installation script calls conda to install all the necessary python packages and software. 
-PS: The POEM calls either Prokka or MetaGeneMark to make gene prediction. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of gmhmmp to $PATH environment variable.
+PS: POEM calls either Prokka or MetaGeneMark for gene predictions. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of gmhmmp to $PATH environment variable.
 
 ## Example
-===============
 
-example directory contain a genome fasta file of E.coli, run the script named runme.sh to test the pipeline
 
+example directory contain a genome fasta file of _E.coli_, run  ```runme.sh``` to test the pipeline
+```
 $ cd ./example
 
 $ bash ./runme.sh eco.fasta
-
+```
 
 
 ## Usage
-===============
+
 
 For short reads:
 
@@ -51,7 +51,7 @@ For genome/assembly:
 
 
 ## Output
-===============
+
 
 POEM will create a directory named read.fasta_output to save the results. The results include serveral file:
 
