@@ -8,7 +8,7 @@ This pipeline is available on Linux systems. Make sure that you have the followi
 1.  [Anaconda](https://www.anaconda.com/ "https://www.anaconda.com/") for Python 2.7
 2.  [conda](https://conda.io/en/latest/ "https://conda.io/en/latest/")
 
-    [comment] <> NOT CLEAR make sure to add path of gmhmmp to $PATH environment variable
+    [comment] make sure to add path of conda to $PATH environment variable
 
 ## Installation
 
@@ -20,7 +20,7 @@ $ cd ./POEM
 $ bash ./install.sh
 ```
 The installation script calls conda to install all the necessary python packages and software. 
-PS: POEM calls either Prokka or MetaGeneMark for gene predictions. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of gmhmmp to $PATH environment variable.
+PS: POEM calls either Prokka or MetaGeneMark for gene predictions. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of binary executable file ```gmhmmp``` in [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") to $PATH environment variable.
 
 ## Example
 
