@@ -7,6 +7,7 @@ This pipeline is available on Linux systems. Make sure that you have the followi
 
 1.  [Anaconda](https://www.anaconda.com/ "https://www.anaconda.com/"))
 2.  [conda](https://conda.io/en/latest/ "https://conda.io/en/latest/")
+
     make sure to add path of gmhmmp to $PATH environment variable
 
 ## Installation
