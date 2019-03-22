@@ -3,20 +3,10 @@ POEM is a pipeline which can predict operons and core operons from metagenomic g
 ## Requirement
 ==============
 
-Make sure that you have the following installed
+This pipeline is available on Linux systems. Make sure that you have the following installed
 
-1.  Python2.7 (Recommend [Anaconda](https://www.anaconda.com/ "https://www.anaconda.com/")) and Packages:
-    1. Networkx
-    2. Biopython (version >=1.68)
-    3. Numpy (version >= 1.11.2)
-    4. Keras (version >= 2.2.2)
-2.  [Diamond](https://github.com/bbuchfink/diamond "https://github.com/bbuchfink/diamond") (version >= 0.8.18)
-3.  [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/"):
-
-        make sure to add path of gmhmmp to $PATH environment variable
-
-4.  [CD-HIT](http://weizhongli-lab.org/cd-hit/ "http://weizhongli-lab.org/cd-hit/")
-5.  [IDBA-UD](https://github.com/loneknightpy/idba, "https://github.com/loneknightpy/idba")
+1.  [Anaconda](https://www.anaconda.com/ "https://www.anaconda.com/"))
+2.  [conda](https://conda.io/en/latest/ "https://conda.io/en/latest/")
 
 
 ## Installation
@@ -27,6 +17,9 @@ $ git clone https://github.com/Rinoahu/POEM
 $ cd ./POEM
 
 $ bash ./install.sh
+
+The installation script calls conda to install all the necessary python packages and software. 
+PS: The POEM calls either Prokka or MetaGeneMark to make gene prediction. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of gmhmmp to $PATH environment variable.
 
 ## Example
 ===============
