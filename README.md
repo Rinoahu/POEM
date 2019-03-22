@@ -5,10 +5,10 @@ POEM is a pipeline which can predict operons and core operons from metagenomic g
 
 This pipeline is available on Linux systems. Make sure that you have the following installed
 
-1.  [Anaconda](https://www.anaconda.com/ "https://www.anaconda.com/")
+1.  [Anaconda](https://www.anaconda.com/ "https://www.anaconda.com/") for Python 2.7
 2.  [conda](https://conda.io/en/latest/ "https://conda.io/en/latest/")
 
-    make sure to add path of gmhmmp to $PATH environment variable
+    [comment] <> NOT CLEAR make sure to add path of gmhmmp to $PATH environment variable
 
 ## Installation
 
