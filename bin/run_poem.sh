@@ -90,7 +90,8 @@ echo ''
 
 if [[ $gpd == "gmk" ]] || [[ $gpd == "genemark" ]]; then
 
-    gmhmmp=/home/xiaoh/Downloads/genome/evaluator/quast-3.1/libs/genemark/linux_64/gmhmmp 
+    #gmhmmp=/home/xiaoh/Downloads/genome/evaluator/quast-3.1/libs/genemark/linux_64/gmhmmp 
+    gmhmmp=gmhmmp 
     $gmhmmp -A $fasta\_gmk_aa.fsa -p 0 -f G -m $SCRIPTPATH/../config/MetaGenemark/MetaGeneMark_v1.mod $fasta
 
 elif [[ $gpd == "prokka" ]] || [[ $gpd == "pka" ]]; then
