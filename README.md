@@ -20,7 +20,7 @@ $ cd ./POEM
 $ bash ./install.sh
 ```
 The installation script calls conda to install all the necessary python packages and software. 
-PS: POEM calls either Prokka or MetaGeneMark for gene predictions. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of binary executable file [gmhmmp]() in [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") to $PATH environment variable.
+PS: POEM calls either Prokka or MetaGeneMark for gene predictions. If the users want to use MetaGeneMark, they must install it by themselves, because [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") requires academic users to agree to an license before downloading. After installtation, make sure to add path of binary executable file [gmhmmp](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") in [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/") to $PATH environment variable.
 
 ## Example
 
