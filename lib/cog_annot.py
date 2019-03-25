@@ -28,7 +28,10 @@ funs = pwd + '/fun2003-2014.tab'
 # build the ncbi to cog table
 ##############################
 ncbi2cog = {}
-f = open(cids, 'r')
+if sys.version_info[0] > 2:
+    f = open(cids, 'r', encoding='windows-1252')
+else:
+    f = open(cids, 'r')
 for i in f:
     j = i[: -1].split(',')
     nbid = j[0]
@@ -38,7 +41,12 @@ for i in f:
 f.close()
 
 # the cog to function table
-f = open(names, 'r')
+#f = open(names, 'r')
+if sys.version_info[0] > 2:
+    f = open(names, 'r', encoding='windows-1252')
+else:
+    f = open(names, 'r')
+
 cog2fun = {}
 for i in f:
     j = i[: -1].split('\t')

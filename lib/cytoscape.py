@@ -27,8 +27,15 @@ col_dict = {}
 cog_col_dict = {}
 #cogname = sys.argv[2]
 cogname = scriptpath + '../database/cog/cog2014/cognames2003-2014.tab'
-f = open(cogname, 'r')
-print f.next()[:-1] + '\t' + 'color'
+
+if sys.version_info[0] > 2:
+    f = open(cogname, 'r', encoding='windows-1252')
+else:
+    f = open(cogname, 'r')
+if sys.version_info[0] > 2:
+    print next(f)[:-1] + '\t' + 'color'
+else:
+    print f.next()[:-1] + '\t' + 'color'
 for i in f:
     qid, j, annot = i[:-1].split('\t')[: 3]
 

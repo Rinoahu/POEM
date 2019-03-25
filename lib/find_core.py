@@ -32,7 +32,13 @@ for i in f:
 
 f.close()
 
-f = open(scriptpath + '../database/cog/cog2014/cognames2003-2014.tab', 'r')
+#f = open(scriptpath + '../database/cog/cog2014/cognames2003-2014.tab', 'r')
+if sys.version_info[0] == 3:
+    f = open(scriptpath + '../database/cog/cog2014/cognames2003-2014.tab', 'r', encoding='windows-1252')
+else:
+    f = open(scriptpath + '../database/cog/cog2014/cognames2003-2014.tab', 'r')
+
+
 cog_dict = {}
 cog_name_dict = {}
 for i in f:
@@ -264,8 +270,19 @@ for i, j in cog_graph_edge_freq.items():
         G_AB.add_edge(a, b, weight = ab_count)
 
 
-f = open(scriptpath + '../database/operondb/operon_graph.txt', 'r')
-paths, gene_cog_dict, cog_annot_dict = pickle.load(f)
+if sys.version_info[0] == 3:
+    f = open(scriptpath + '../database/operondb/operon_graph.txt', 'rb')
+else:
+    f = open(scriptpath + '../database/operondb/operon_graph.txt', 'r')
+
+
+#paths, gene_cog_dict, cog_annot_dict = pickle.load(f)
+if sys.version_info[0] > 2:
+    paths, gene_cog_dict, cog_annot_dict = pickle.load(f, encoding='latin1')
+else:
+    paths, gene_cog_dict, cog_annot_dict = pickle.load(f)
+
+f.close();
 
 operons = [[gene_cog_dict.get(b, set()) for b in a ] for a in paths]
 

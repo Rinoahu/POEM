@@ -1226,7 +1226,10 @@ if __name__ == '__main__':
 
         # determine the number of col
         f = open(test, 'r')
-        header = f.next().split('\t')
+        if sys.version_info[0] == 2:
+            header = f.next().split('\t')
+        else:
+            header = next(f).split('\t')
         f.close()
         if header.count('+') + header.count('-') > 1:
             #print 'try loading lstm or 2d model'
