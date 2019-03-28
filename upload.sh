@@ -13,7 +13,7 @@ git config --global user.name Rinoahu
 git remote rm origin
 
 git add -A .
-git commit -m 'fixed path of gmhmmp'
+git commit -m 'fixed bugs in run_poem.sh'
 git remote add origin https://github.com/Rinoahu/POEM
 git pull origin master
 git push origin master
