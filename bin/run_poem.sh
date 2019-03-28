@@ -74,7 +74,6 @@ if [[ $asm == "Y" ]] || [[ $asm == "y" ]]
 then
     echo "assembly mode"
 
-    lr="$3"
     if [[ $lr == "n" ]] || [[ $lr == "N" ]]; then
         idba_ud -r $fas -o $temp/assembly --pre_correction > $temp/asm.log
     else
