@@ -29,6 +29,10 @@ do
         gpd="$2"
         shift # past argument
         ;;
+        -l|--fasta)
+        lr="$2"
+        shift # past argument
+        ;;
         *)
             # unknown option
         ;;
@@ -44,8 +48,12 @@ if [ ! $fas ]; then
     echo 'for genome|assembly|contig'
 	echo '$ bash this_script.sh -f genome.fsa -a y -p prokka'
     echo ''
-    echo 'for short reads'
-	echo '$ bash this_script.sh -f reads.fsa -a n -p prokka'
+    echo 'for short reads (length <= 600)'
+	echo '$ bash this_script.sh -f reads.fsa -a y -p prokka -l n'
+
+    echo 'for short reads (length > 600)'
+	echo '$ bash this_script.sh -f reads.fsa -a y -p prokka -l y'
+
 	echo '#'
 	echo '#######################################'
 	echo ''
@@ -65,7 +73,13 @@ mkdir -p $temp
 if [[ $asm == "Y" ]] || [[ $asm == "y" ]]
 then
     echo "assembly mode"
-    idba_ud -l $fas -o $temp/assembly --pre_correction > $temp/asm.log
+
+    lr="$3"
+    if [[ $lr == "n" ]] || [[ $lr == "N" ]]; then
+        idba_ud -r $fas -o $temp/assembly --pre_correction > $temp/asm.log
+    else
+        idba_ud -l $fas -o $temp/assembly --pre_correction > $temp/asm.log
+    fi
     # check the header of the fasta
     awk -F" " '{if($1~/^>/){print $1}else{print $0}}' $temp/assembly/contig.fa > $temp/input.fsa
 else
