@@ -110,7 +110,7 @@ if [[ $gpd == "gmk" ]] || [[ $gpd == "genemark" ]]; then
 elif [[ $gpd == "prokka" ]] || [[ $gpd == "pka" ]]; then
 
     #/usr/bin/perl /home/xiaoh/Downloads/compiler/intel/intelpython27/bin/prokka --quiet --fast --prefix prokka_out --metagenome --force --outdir $fasta\_prokka $fasta
-    prokka --quiet --fast --prefix prokka_out --metagenome --force --outdir $fasta\_prokka $fasta
+    prokka --quiet --fast --prefix prokka_out --metagenome --centre X --compliant --force --outdir $fasta\_prokka $fasta
     $python $SCRIPTPATH/../lib/pka2gmk.py $fasta $fasta\_prokka/prokka_out.faa $fasta\_prokka/prokka_out.gff > $fasta\_gmk_aa.fsa
 
 else
