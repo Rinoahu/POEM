@@ -46,7 +46,7 @@ if [ ! $fas ]; then
 	echo '#'
 	echo '# usage:'
     echo 'for genome|assembly|contig'
-	echo '$ bash this_script.sh -f genome.fsa -a y -p prokka'
+	echo '$ bash this_script.sh -f genome.fsa -a n -p prokka'
     echo ''
     echo 'for short reads (length <= 600)'
 	echo '$ bash this_script.sh -f reads.fsa -a y -p prokka -l n'

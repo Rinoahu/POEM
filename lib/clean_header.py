@@ -12,9 +12,9 @@ for i in f:
     if i.startswith('>'):
         j = i[1:-1]
         print '>AAA_%d'%flag + ' xxxxxx' + j
+        flag += 1
     else:
         print i[:-1]
 
-    flag += 1
 f.close()
 
