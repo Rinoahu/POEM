@@ -15,5 +15,6 @@ for i in f:
     else:
         print i[:-1]
 
+    flag += 1
 f.close()
 
