@@ -7,7 +7,7 @@ from Bio import SeqIO
 ##################
 # the input files
 ##################
-if len(sys.argv[1:]) < 3:
+if len(sys.argv[1:]) < 2:
     print ('this script is used to convert gene identifier of prokka to genemark.\nusage:')
     print('python this.py foo.genome.fsa foo.faa foo.gff')
     raise SystemExit()
@@ -16,10 +16,10 @@ genome, qry, gff = sys.argv[1:4]
 
 scf_dict = {}
 for i in SeqIO.parse(genome, 'fasta'):
-    qid = i.description
-    #qid_c = qid.replace('|', '_')
-    qid_c, sid = qid.split(' xxxxxx')[:2]
-    scf_dict[qid_c] = sid
+    qid = i.id
+    qid_c = qid.replace('|', '_')
+    scf_dict[qid_c] = qid
+
 
 id_dict = {}
 # parse gff

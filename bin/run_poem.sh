@@ -111,8 +111,11 @@ elif [[ $gpd == "prokka" ]] || [[ $gpd == "pka" ]]; then
 
     #/usr/bin/perl /home/xiaoh/Downloads/compiler/intel/intelpython27/bin/prokka --quiet --fast --prefix prokka_out --metagenome --force --outdir $fasta\_prokka $fasta
     #prokka --quiet --fast --prefix prokka_out --metagenome --centre X --compliant --force --outdir $fasta\_prokka $fasta
-    prokka --quiet --fast --prefix prokka_out --metagenome --force --outdir $fasta\_prokka $fasta
-    $python $SCRIPTPATH/../lib/pka2gmk.py $fasta $fasta\_prokka/prokka_out.faa $fasta\_prokka/prokka_out.gff > $fasta\_gmk_aa.fsa
+    # prokka needs clean contig names:
+    $python $SCRIPTPATH/../lib/clean_header.py $fasta > $fasta\_new.fsa
+    prokka --quiet --fast --prefix prokka_out --metagenome --force --outdir $fasta\_prokka $fasta\_new.fsa
+    #$python $SCRIPTPATH/../lib/pka2gmk.py $fasta $fasta\_prokka/prokka_out.faa $fasta\_prokka/prokka_out.gff > $fasta\_gmk_aa.fsa
+    $python $SCRIPTPATH/../lib/pka2gmk.py $fasta\_new.fsa $fasta\_prokka/prokka_out.faa $fasta\_prokka/prokka_out.gff > $fasta\_gmk_aa.fsa
 
 else
     exit 1
